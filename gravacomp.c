@@ -210,8 +210,9 @@ void mostracomp(FILE *arq)
 
                 /* Converte buffer big‑endian para inteiro de 32 bits   */
                 uint32_t val = 0;
-                memcpy(&val, buf, 4);                 /* copia bytes   */
-                val = __builtin_bswap32(val);         /* troca ordem   */
+                for (size_t i = 0; i < 4; i++){  /* percorre buf [0..3]    */
+                    val = (val << 8) | buf[i];   /* shift + OR incremental */
+                }
 
                 if (isSigned) {
                     /* Ajusta sinal: alinha para 32 bits mantendo valor */
