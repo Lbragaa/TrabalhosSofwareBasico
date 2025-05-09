@@ -1,0 +1,8 @@
+Trabalho 1 — INF1018   Armazenamento compactado
+Implementa: gravacomp() e mostracomp()
+
+   • Luan Carlos Almada Braga 2411776  3WA
+   • Diogo  Matrícula  Turma
+
+Relatorio:
+
