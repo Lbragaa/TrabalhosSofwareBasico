@@ -1,0 +1,161 @@
+RELATÓRIO – LABORATÓRIO: GERADOR DE CÓDIGO PARA SBAS
+
+Luan Carlos Almada Braga – 2411776 – Turma 3WA  
+Bruno Tardin Fernandes  – 2411072 – Turma 3WA  
+
+Este relatório descreve os testes utilizados para validar o funcionamento do gerador de código desenvolvido na função `peqcomp`. Cada teste verifica uma construção diferente da linguagem SBas, variando entre retornos simples, operações aritméticas, desvios condicionais e estruturas de repetição. Os resultados esperados foram corretamente atingidos em todos os testes, como detalhado a seguir.
+
+---
+
+**t1.sbas — retorno constante**
+
+```
+ret $42
+```
+
+Retorna diretamente a constante 42. Resultado obtido: **42**.
+
+---
+
+**t2.sbas — soma de dois parâmetros**
+
+```
+v1 : p1
+v2 : p2
+v3 = v1 + v2
+ret v3
+```
+
+Calcula a soma de dois parâmetros (5 + 7). Resultado obtido: **12**.
+
+---
+
+**t3.sbas — multiplicação de dois parâmetros**
+
+```
+v1 : p1
+v2 : p2
+v3 = v1 * v2
+ret v3
+```
+
+Multiplica dois parâmetros (3 × 4). Resultado obtido: **12**.
+
+---
+
+**t4.sbas — subtração entre parâmetros**
+
+```
+v1 : p1
+v2 : p2
+v3 = v1 - v2
+ret v3
+```
+
+Subtrai os parâmetros (10 − 3). Resultado obtido: **7**.
+
+---
+
+**t5.sbas — retorno do maior valor (máximo)**
+
+```
+v1 : p1
+v2 : p2
+v3 = v1 - v2
+iflez v3 6
+ret v1
+ret v2
+```
+
+Compara p1 = 2 e p2 = 10 e retorna o maior. Resultado obtido: **10**.
+
+---
+
+**t6.sbas — valor absoluto**
+
+```
+v1 : p1
+v2 : $0
+v3 = v1 + v2
+iflez v3 6
+ret v3
+v3 = $0 - v3
+ret v3
+```
+
+Calcula |p1| com p1 = −5. Resultado obtido: **5**.
+
+---
+
+**t7.sbas — fatorial (iterativo)**
+
+```
+v1 : p1
+v2 : $1
+v3 : $0
+iflez v1 8
+v2 = v2 * v1
+v1 = v1 - $1
+iflez v3 4
+ret v2
+```
+
+Calcula fatorial de 5. Resultado obtido: **120**.
+
+---
+
+**t8.sbas — Fibonacci (iterativo)**
+
+```
+v1 : p1
+v2 : $0
+v3 : $1
+v4 : $0
+v5 = v1 - v4
+iflez v5 15
+v5 = v2 + v3
+v2 : v3
+v3 : v5
+v4 = v4 + $1
+v5 = v1 - v4
+iflez v5 15
+v5 : $0
+iflez v5 7
+ret v2
+```
+
+Calcula Fibonacci de 7. Resultado obtido: **13**.
+
+---
+
+**t9.sbas — função sinal**
+
+```
+v1 : p1
+iflez v1 4
+ret $1
+ret $0
+```
+
+Retorna 0 se `p1 <= 0`. Entrada: p1 = −3. Resultado obtido: **0**.
+
+---
+
+**t10.sbas — clamp mínimo**
+
+```
+v1 : p1
+v2 : $5
+v3 = v1 - v2
+iflez v3 6
+ret v1
+ret v2
+```
+
+Retorna o maior entre p1 e 5. Com p1 = 3, retorna 5. Resultado obtido: **5**.
+
+---
+
+**Resumo Final:**
+
+Todos os testes funcionaram corretamente e permitiram validar progressivamente cada construção presente na linguagem SBas: atribuições, operações aritméticas, saltos condicionais, constantes e retornos. O uso de `iflez` com back-patch, o controle da pilha via offsets de `%rbp`, e a manipulação dos registradores de parâmetros mostraram-se compatíveis com a especificação da ABI. O projeto como um todo cumpriu sua função, e o comportamento gerado foi fiel ao esperado da semântica das instruções SBas.

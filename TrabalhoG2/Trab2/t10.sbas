@@ -1,0 +1,6 @@
+v1 : p1
+v2 : $5
+v3 = v1 - v2
+iflez v3 6
+ret v1
+ret v2
